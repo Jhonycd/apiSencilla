@@ -72,6 +72,21 @@ apiSencilla/
 - Implementar roles (admin/user)
 - Desplegar en Render o Railway
 
+V0.0.0.1:
+---
+
+## 🚧 Actualización — Sesión, Navegación y Logout (junio 2025)
+
+- Se implementó guardado del token JWT en `localStorage` tras login exitoso
+- Se creó una barra de navegación (`NavBar`) con enlaces a Registro y Login
+- Se agregó botón de “Cerrar sesión” que elimina el token y redirige al login
+- El botón de logout solo se muestra si hay sesión activa (token presente)
+- Se actualizaron estilos con CSS Modules y estructura de carpetas modular
+- El `README.md` fue mejorado para reflejar la integración entre backend y frontend
+
+Próximo paso: aplicar Tailwind CSS para transformar la estética con un diseño moderno y responsive ⚛️🎨
+
+
 Desarrollado por Jhony, con sudor, testeo y persistencia.
 
 ---
