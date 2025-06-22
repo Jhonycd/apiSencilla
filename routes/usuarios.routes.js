@@ -1,9 +1,19 @@
 import express from 'express';
-import Usuario from '../models/usuario.js';
+import Usuario from '../models/Usuario.js';
 import validarEsquema from '../middlewares/validarEsquema.js';
+import verificarToken from '../middlewares/verificarToken.js';
 import { usuarioSchema } from '../validaciones/usuarioSchema.js';
 
 const router = express.Router();
+
+// Ruta protegida primero (para test)
+router.get('/privado', verificarToken, (req, res) => {
+ console.log('🧾 Usuario decodificado desde token:', req.usuario);
+ res.json({
+  mensaje: 'Accediste a una ruta protegida 🎉',
+  usuario: req.usuario
+ });
+});
 
 // Obtener todos los usuarios
 router.get('/', async (req, res) => {
@@ -40,7 +50,9 @@ router.post('/', validarEsquema(usuarioSchema), async (req, res) => {
 // Actualizar un usuario existente
 router.put('/:id', validarEsquema(usuarioSchema), async (req, res) => {
  try {
-  const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const usuarioActualizado = await Usuario.findByIdAndUpdate(req.params.id, req.body, {
+   new: true
+  });
   if (!usuarioActualizado) return res.status(404).json({ mensaje: 'Usuario no encontrado' });
   res.json(usuarioActualizado);
  } catch (error) {
@@ -57,16 +69,6 @@ router.delete('/:id', async (req, res) => {
  } catch (error) {
   res.status(500).json({ mensaje: 'Error al eliminar usuario' });
  }
-});
-
-import verificarToken from '../middlewares/verificarToken.js';
-
-// Ruta protegida
-router.get('/privado', verificarToken, (req, res) => {
- res.json({
-  mensaje: 'Accediste a una ruta protegida 🎉',
-  usuario: req.usuario  // Este es el payload del token
- });
 });
 
 export default router;

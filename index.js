@@ -3,10 +3,13 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import usuariosRoutes from './routes/usuarios.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import cors from 'cors';
+
+const app = express();
+app.use(cors());
 
 dotenv.config();
 
-const app = express();
 
 // Middleware para parsear JSON
 app.use(express.json());

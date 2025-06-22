@@ -1,7 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../index.js';
-import Usuario from '../models/usuario.js';
+import Usuario from '../models/Usuario.js'; // Asegurate de que la U esté en mayúscula
 
 const api = request(app);
 
@@ -14,11 +14,11 @@ const testUser = {
 beforeAll(async () => {
  try {
   await mongoose.connect(process.env.MONGO_URI);
+  await Usuario.deleteMany({ email: testUser.email }); // Limpieza previa
  } catch (e) {
   console.error('❌ Error de conexión:', e.message);
  }
 });
-
 
 afterAll(async () => {
  await mongoose.connection.close();
@@ -28,21 +28,17 @@ describe('🧪 Autenticación de usuarios', () => {
  let token = '';
 
  test('▶️ Registro exitoso', async () => {
-  const res = await api
-   .post('/api/auth/registro')
-   .send(testUser);
+  const res = await api.post('/api/auth/registro').send(testUser);
 
   expect(res.statusCode).toBe(201);
   expect(res.body.mensaje).toMatch(/registrado/i);
  });
 
  test('🔑 Login exitoso y devuelve token', async () => {
-  const res = await api
-   .post('/api/auth/login')
-   .send({
-    email: testUser.email,
-    contraseña: testUser.contraseña
-   });
+  const res = await api.post('/api/auth/login').send({
+   email: testUser.email,
+   contraseña: testUser.contraseña
+  });
 
   expect(res.statusCode).toBe(200);
   expect(res.body.token).toBeDefined();
@@ -58,9 +54,4 @@ describe('🧪 Autenticación de usuarios', () => {
   expect(res.statusCode).toBe(200);
   expect(res.body.usuario).toBeDefined();
  });
-
- afterAll(async () => {
-  await mongoose.connection.close();
- });
-
 });
