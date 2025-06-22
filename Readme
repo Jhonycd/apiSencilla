@@ -1,0 +1,80 @@
+📄 README.md
+# 🧪 apiSencilla — API REST con Express, MongoDB y Testing
+
+Una API sencilla construida con **Express.js** y **MongoDB**, que incluye autenticación de usuarios con **JWT**, validaciones con **Joi**, hashing con **bcrypt**, y pruebas automatizadas con **Jest** y **Supertest**.
+
+> Proyecto backend modularizado, ideal para entrenamiento en desarrollo seguro y testeo automático de endpoints.
+
+---
+
+## 🚀 Tecnologías utilizadas
+
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- Joi para validaciones
+- bcryptjs para hashing
+- JWT para autenticación
+- Jest + Supertest para testing
+
+---
+
+## ⚙️ Instalación
+
+1. Cloná el repositorio:
+
+```bash
+git clone https://github.com/TU_USUARIO/apiSencilla.git
+cd apiSencilla
+
+2- Instalá las dependencias:
+npm install
+
+3- Configurá las variables de entorno:
+Crea un archivo .env con:
+MONGO_URI=tu_uri_de_mongodb
+PORT=3000
+JWT_SECRET=claveultrasecreta
+
+🧪 Correr los tests
+npm test
+
+
+Usamos node --experimental-vm-modules para poder testear con ESModules.
+
+
+▶️ Levantar el servidor
+npm start
+
+
+La API quedará corriendo en http://localhost:3000.
+
+🧭 Endpoints principales
+- POST /api/auth/registro → Registro de usuario
+- POST /api/auth/login → Login y generación de token
+- GET /api/usuarios → Acceso con JWT (ruta protegida)
+
+✨ Estructura del proyecto
+apiSencilla/
+├── index.js
+├── routes/
+├── models/
+├── middlewares/
+├── validaciones/
+├── tests/
+├── .env
+├── package.json
+
+
+
+🗺️ Próximos pasos
+- Agregar refresh tokens
+- Implementar roles (admin/user)
+- Desplegar en Render o Railway
+
+Desarrollado por Jhony, con sudor, testeo y persistencia.
+
+---
+
+Seguimos en breve.....
+

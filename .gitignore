@@ -1,0 +1,11 @@
+#Dependencias y entorno
+node_modules/
+.env
+#Cobertura de tests
+coverage/
+#Logs y temporales
+*.log
+*.temp
+
+cliente/dist/
+
